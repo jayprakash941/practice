@@ -1,3 +1,7 @@
+// https://leetcode.com/explore/learn/card/linked-list/214/two-pointer-technique/1212/
+
+// https://leetcode.com/explore/learn/card/linked-list/214/two-pointer-technique/1214/
+
 var hasLinkListCycle = function (head) {
   let fast = head,
     slow = head;
@@ -6,11 +10,22 @@ var hasLinkListCycle = function (head) {
     slow = slow.next;
     if (fast == slow) {
       return true;
+      // return findCyclePos(head, fast)
     }
   }
   return false;
 };
-
+const findCyclePos = (head, intersection) => {
+  let p1 = head;
+  let p2 = intersection;
+  let i = 0;
+  while (p1 != p2) {
+    p1 = p1.next;
+    p2 = p2.next;
+    i++;
+  }
+  return i;
+};
 class Node {
   constructor(val) {
     this.val = val;
