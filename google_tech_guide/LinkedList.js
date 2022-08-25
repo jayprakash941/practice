@@ -19,6 +19,9 @@ MyLinkedList.prototype.get = function (index) {
   }
   var temp = this.head;
   var count = 0;
+  if (index === 0) {
+    return this.head.v;
+  }
   while (temp !== null) {
     if (count++ === index) {
       return temp.v;
@@ -69,6 +72,11 @@ MyLinkedList.prototype.addAtIndex = function (index, val) {
   }
   var prev = null;
   var temp = this.head;
+  if (index === 0) {
+    node.next = this.head;
+    this.head = node;
+    return;
+  }
   while (temp.next !== null && index > 0) {
     prev = temp;
     temp = temp.next;
@@ -84,11 +92,13 @@ MyLinkedList.prototype.print = function () {
   if (this.head === null) {
     return console.log(null);
   }
-  var temp = this.head;
-  while (temp !== null) {
-    console.log(temp.v);
-    temp = temp.next;
+  var curr = this.head;
+  var str = '';
+  while (curr) {
+    str += curr.v + ' ';
+    curr = curr.next;
   }
+  console.log(str);
 };
 
 /**
@@ -96,19 +106,20 @@ MyLinkedList.prototype.print = function () {
  * @return {void}
  */
 MyLinkedList.prototype.deleteAtIndex = function (index) {
-  if (this.head === null) {
-    return;
+  if (this.head === null || index < 0) {
+    return null;
   }
-  var prev = null;
-  var temp = this.head;
-  while (temp.next !== null && index > 0) {
-    prev = temp;
-    temp = temp.next;
-    index--;
-  }
+  let cur = this.head;
+  let prev = null;
   if (index === 0) {
-    prev.next = temp.next;
+    this.head = cur.next;
+    return cur.next;
   }
+  while (cur.next != null && index > 0) {
+    prev = cur;
+    cur = cur.next;
+  }
+  prev.next = cur.next;
 };
 
 /**
@@ -116,9 +127,11 @@ MyLinkedList.prototype.deleteAtIndex = function (index) {
  */
 var obj = new MyLinkedList();
 obj.addAtHead(1);
-obj.addAtTail(2);
-obj.addAtIndex(1, 3);
+obj.addAtHead(2);
+obj.addAtTail(3);
+obj.addAtIndex(0, 4);
+obj.print();
 obj.deleteAtIndex(1);
 obj.print();
-var param_1 = obj.get(1);
+var param_1 = obj.get(0);
 console.log(param_1);
