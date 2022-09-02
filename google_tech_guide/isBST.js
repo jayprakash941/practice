@@ -1,17 +1,19 @@
 // https://leetcode.com/problems/validate-binary-search-tree/
 
-var isValidBST = function (root) {
-  return isValidBST(root, null, null);
-
-  function isValidBST(root, min, max) {
-    if (root == null) return true;
-    return (
-      (min == null || root.val > min.val) &&
-      (max == null || root.val < max.val) &&
-      isValidBST(root.left, min, root) &&
-      isValidBST(root.right, root, max)
-    );
+// using inorder traversal
+var prev = null;
+var checkBST1 = function (head) {
+  if (head === null) {
+    return true;
   }
+  if (!checkBST1(head.left)) {
+    return false;
+  }
+  if (prev !== null && head.val <= prev) {
+    return false;
+  }
+  prev = head.val;
+  return checkBST1(head.right);
 };
 
 class Tree {
@@ -27,4 +29,4 @@ var left = new Tree(1);
 var right = new Tree(4);
 root.left = left;
 root.right = right;
-console.log(isValidBST(root));
+console.log(checkBST1(root));
