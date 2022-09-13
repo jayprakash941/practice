@@ -32,3 +32,6 @@ const findPair = (arr, x) => {
 
 assert.deepEqual(findPair(arr, -2), [-3, 1]);
 assert.deepEqual(findPair(arr, -20), void 0);
+
+
+///
