@@ -327,3 +327,33 @@ root1.left = left;
 root1.right = right;
 let target = 10
 console.log(invertTree(root))
+
+
+
+///https://leetcode.com/problems/path-sum-ii/
+var pathSum = function(root, targetSum) {
+  return traversal(root, [], [], targetSum);
+};
+
+let traversal = (root ,subRes, res, t) => {
+  if(root === null){
+      return [];
+  }
+  subRes.push(root.val);
+      
+  
+  if(root.left === null && root.right === null ){
+      if(t-root.val  === 0){
+          res.push([...subRes]);
+      }
+  }
+  if(root.left !== null){
+     traversal(root.left, subRes, res, t-root.val) 
+  }
+  
+  if(root.right !== null){
+  traversal(root.right, subRes, res,  t-root.val) 
+  }
+  subRes.pop();
+  return res;
+}
