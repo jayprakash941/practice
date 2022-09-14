@@ -1,6 +1,8 @@
 /**
  * Solution for GeeksForGeeks - https://www.geeksforgeeks.org/find-element-appears-array-every-element-appears-twice/?ref=lbp
  *
+ * 
+ Find Pivot Index
  */
 const assert = require('assert');
 
